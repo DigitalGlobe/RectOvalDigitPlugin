@@ -53,9 +53,9 @@ class OvalFromCenterTool(QgsMapTool):
     
     def canvasPressEvent(self,event):
 		layer = self.canvas.currentLayer()
-		color = QColor(255,0,0)
+		#color = QColor(255,0,0)
 		self.rb = QgsRubberBand(self.canvas, True)
-		self.rb.setColor(color)
+		#self.rb.setColor(color)
 		self.rb.setWidth(1)
 		x = event.pos().x()
 		y = event.pos().y()
@@ -161,7 +161,7 @@ class OvalByExtentTool(QgsMapTool):
 		layer = self.canvas.currentLayer()
 		color = QColor(255,0,0)
 		self.rb = QgsRubberBand(self.canvas, True)
-		self.rb.setColor(color)
+		#self.rb.setColor(color)
 		self.rb.setWidth(1)
 		point = self.toLayerCoordinates(layer,event.pos())
 		pointMap = self.toMapCoordinates(layer, point)
@@ -261,14 +261,15 @@ class CircleFromCenterTool(QgsMapTool):
             self.mCtrl = False
     
     def canvasPressEvent(self,event):
-		layer = self.canvas.currentLayer()
-		color = QColor(255,0,0)
-		self.rb = QgsRubberBand(self.canvas, True)
-		self.rb.setColor(color)
-		self.rb.setWidth(1)
-		x = event.pos().x()
-		y = event.pos().y()
-		if self.mCtrl:
+        layer = self.canvas.currentLayer()
+        color = QColor(255,0,0)
+        self.rb = QgsRubberBand(self.canvas, True)
+        self.rb.setColor(color)
+        self.rb.setFillColor(QColor(255, 0, 0, 0))
+        self.rb.setWidth(1)
+        x = event.pos().x()
+        y = event.pos().y()
+        if self.mCtrl:
 			startingPoint = QPoint(x,y)
 			snapper = QgsMapCanvasSnapper(self.canvas)
 			(retval,result) = snapper.snapToCurrentLayer (startingPoint, QgsSnapper.SnapToVertex)
@@ -280,12 +281,12 @@ class CircleFromCenterTool(QgsMapTool):
 					point = result[0].snappedVertex
 				else:
 					point = self.toLayerCoordinates(layer,event.pos())
-		else:
-			point = self.toLayerCoordinates(layer,event.pos())	
-		pointMap = self.toMapCoordinates(layer, point)
-		self.xc = pointMap.x()
-		self.yc = pointMap.y()
-		if self.rb:return
+        else:
+            point = self.toLayerCoordinates(layer,event.pos())
+            pointMap = self.toMapCoordinates(layer, point)
+        self.xc = pointMap.x()
+        self.yc = pointMap.y()
+        if self.rb:return
 		    
     def canvasMoveEvent(self,event):
         settings = QSettings()
@@ -364,18 +365,19 @@ class RectByExtentTool(QgsMapTool):
                                   
  
     def canvasPressEvent(self,event):
-		layer = self.canvas.currentLayer()
-		color = QColor(255,0,0)
-		self.rb = QgsRubberBand(self.canvas, True)
-		self.rb.setColor(color)
-		self.rb.setWidth(1)
-		x = event.pos().x()
-		y = event.pos().y()
-		point = self.toLayerCoordinates(layer,event.pos())		
-		pointMap = self.toMapCoordinates(layer, point)
-		self.x0 = pointMap.x()
-		self.y0 = pointMap.y()		
-		if self.rb:return
+        layer = self.canvas.currentLayer()
+        color = QColor(255, 0, 0)
+        self.rb = QgsRubberBand(self.canvas, True)
+        self.rb.setColor(color)
+        self.rb.setFillColor(QColor(255, 0, 0, 0))
+        self.rb.setWidth(1)
+        x = event.pos().x()
+        y = event.pos().y()
+        point = self.toLayerCoordinates(layer,event.pos())
+        pointMap = self.toMapCoordinates(layer, point)
+        self.x0 = pointMap.x()
+        self.y0 = pointMap.y()
+        if self.rb:return
 		    
     def canvasMoveEvent(self,event):
         if not self.rb:return
@@ -462,9 +464,9 @@ class RectFromCenterTool(QgsMapTool):
     
     def canvasPressEvent(self,event):
 		layer = self.canvas.currentLayer()
-		color = QColor(255,0,0)
+		#color = QColor(255,0,0)
 		self.rb = QgsRubberBand(self.canvas, True)
-		self.rb.setColor(color)
+		#self.rb.setColor(color)
 		self.rb.setWidth(1)
 		x = event.pos().x()
 		y = event.pos().y()
@@ -481,7 +483,7 @@ class RectFromCenterTool(QgsMapTool):
 				else:
 					point = self.toLayerCoordinates(layer,event.pos())
 		else:
-			point = self.toLayerCoordinates(layer,event.pos())		
+			point = self.toLayerCoordinates(layer,event.pos())
 		pointMap = self.toMapCoordinates(layer, point)
 		self.xc = pointMap.x()
 		self.yc = pointMap.y()
@@ -576,9 +578,9 @@ class SquareFromCenterTool(QgsMapTool):
     
     def canvasPressEvent(self,event):
 		layer = self.canvas.currentLayer()
-		color = QColor(255,0,0)
+		#color = QColor(255,0,0)
 		self.rb = QgsRubberBand(self.canvas, True)
-		self.rb.setColor(color)
+		#self.rb.setColor(color)
 		self.rb.setWidth(1)
 		x = event.pos().x()
 		y = event.pos().y()
@@ -679,9 +681,9 @@ class RotateTool(QgsMapTool):
  
     def canvasPressEvent(self, event):
         self.layer = self.canvas.currentLayer()
-        color = QColor(255,0,0)
+        #color = QColor(255,0,0)
         self.rb = QgsRubberBand(self.canvas, True)
-        self.rb.setColor(color)
+        #self.rb.setColor(color)
         self.rb.setWidth(1)
         if self.layer.selectedFeatureCount() != 1:
             QMessageBox.information(None,  "Selection information",  "Please select exactly one rectangle or oval.")
